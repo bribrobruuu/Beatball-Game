@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
             case State.MENU:
                 Cursor.visible=true;
                 
-               // highscoreText.text = "HIGHSCORE: " + PlayerPrefs.GetInt("highscore");
+                highscoreText.text = "HIGHSCORE: " + PlayerPrefs.GetInt("highscore");
                 
                 panelMenu.SetActive(true);
                 break;
