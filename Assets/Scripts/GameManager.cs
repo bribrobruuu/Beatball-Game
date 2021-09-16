@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject panelGameOver;
 
     public GameObject[] levels;
+    AudioSource _source;
 
     public static GameManager Instance { get; private set; }
 
@@ -68,13 +69,16 @@ public class GameManager : MonoBehaviour
 
     public void PlayClicked()
     {
+
         SwitchState(State.INIT);
+        _source.Play();
     }
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
         SwitchState(State.MENU);
+        _source = GetComponent<AudioSource>();
     }
 
     public void SwitchState(State newState, float delay=0)
@@ -86,15 +90,12 @@ public class GameManager : MonoBehaviour
         EndState();
         _isSwitchingState = true;
         yield return new WaitForSeconds(delay);
+        
         _state = newState;
         BeginState(newState);
         _isSwitchingState = false;
     }
-
-    IEnumerator DelayComplete(float delay) {
-        panelLevelCompleted.SetActive(true);
-        yield return new WaitForSeconds(delay);
-    }
+    
     void BeginState(State newState)
     {
         switch (newState)
@@ -117,7 +118,6 @@ public class GameManager : MonoBehaviour
                 Score = 0;
                 Level = 0;
                 Ball = 3;
-               
                 SwitchState(State.LOADLEVEL);
                 break;
             case State.PLAY:
@@ -126,11 +126,8 @@ public class GameManager : MonoBehaviour
                 panelLevelCompleted.SetActive(true);
                 
                 Destroy(_currentBall);
-                Destroy(_currentLevel);
-                
-               
-               
-                Level++;
+                Destroy(_currentLevel);        
+                    Level++;
                 
                 SwitchState(State.LOADLEVEL,2f);
                 break;
@@ -187,7 +184,6 @@ public class GameManager : MonoBehaviour
             case State.INIT:
                 break;
             case State.PLAY:
-
                 if (_currentBall == null)
                 {
                     if (Ball > 0)
@@ -205,8 +201,6 @@ public class GameManager : MonoBehaviour
                     SwitchState(State.LEVELCOMPLETED);
                     
                 }
-
-
                 break;
             case State.LEVELCOMPLETED:
                 break;

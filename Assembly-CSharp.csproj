@@ -57,6 +57,7 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Ball.cs" />
     <Compile Include="Assets\Scripts\Brick.cs" />
+    <Compile Include="Assets\yes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

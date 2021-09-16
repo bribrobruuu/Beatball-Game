@@ -19,12 +19,8 @@ public class Brick : MonoBehaviour
         _orgMaterial = _renderer.sharedMaterial;
         
     }
-
-    
     void Update()
-    {
-       // transform.Rotate(rotator * Time.deltaTime);
-        
+    {   
     }
     private void OnCollisionEnter(Collision collision)
     {
